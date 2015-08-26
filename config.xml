@@ -3,15 +3,21 @@
         xmlns = "http://www.w3.org/ns/widgets" 
         xmlns:cdv = "http://cordova.apache.org/ns/1.0"
         xmlns:gap = "http://phonegap.com/ns/1.0">
+    
   <name>UFW</name>
+  
   <description>
         UFW application
   </description>
+  
   <author email="e.nechehin@digital.umh.ua" href="http://tochka.net/">
       Tochka.net
   </author>
+  
   <content src="index.html"/>
+  
   <access origin="*"/>
+  
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -20,12 +26,16 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name='phonegap-version' value='cli-5.1.1' />
+  
+  <plugin name="cordova-plugin-splashscreen" spec="2.1.0" />
   <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
   <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-  <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+  <gap:plugin name="org.apache.cordova.splashscreen" />
+  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
@@ -54,6 +64,7 @@
     <splash src="resources/ios/splash/Default@2x~iphone.png" width="640" height="960"/>
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
   </platform>
+  
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
@@ -74,6 +85,7 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+  
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
-  <gap:splash src="resources/android/splash/drawable-port-xhdpi-screen.png" />
+  
 </widget>
