@@ -75,4 +75,5 @@
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
+  <gap:splash src="resources/android/splash/drawable-port-xhdpi-screen.png" />
 </widget>
