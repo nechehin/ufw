@@ -1,0 +1,42 @@
+<ion-view view-title="Розклад показів">
+    
+    <ion-content class="info-slider">
+
+        <ion-slide-box show-pager="false" on-slide-changed="dayChange($index)">
+            
+            <ion-slide ng-repeat="day in days">
+                
+                <div class="nav-days" ng-class="{'first': $first, 'last': $last}">
+                    <a class="arrow-left" ng-click="prevDay()"><i class="ion-ios-arrow-back"></i></a>
+                    <a class="arrow-right" ng-click="nextDay()"><i class="ion-ios-arrow-forward"></i></a>
+                    {{day.date | formatDate}}
+                </div>
+                
+                <ion-content>
+                    
+                    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+                    </ion-refresher>
+                    
+                    <ion-list class="events">
+
+                        <ion-item class="item" ng-repeat="event in day.events" ng-class="eventClass(event)">
+                            <h2>
+                                {{event.time}} 
+                                <span class="location" ng-if="event.location.length">
+                                    <i class="ion-ios-location"></i>
+                                    {{event.location}} 
+                                </span>
+                            </h2>
+                            <p>{{event.title}}</p>
+                        </ion-item>
+
+                    </ion-list>
+                </ion-content>
+                
+            </ion-slide>
+           
+        </ion-slide-box>
+        
+    </ion-content>
+    
+</ion-view>

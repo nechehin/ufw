@@ -1,0 +1,17 @@
+<ion-view view-title="{{item.name}}">
+
+    <ion-content>
+        
+        <div class="hero" style="background-image: url({{item.photo}})"></div>
+        
+        <div class="content double-padding article">
+            
+            <h3 class="positive">{{item.name}}</h3>
+            
+            <div ng-bind-html="item.text | hrefToJS"></div>
+            
+        </div>
+
+    </ion-content>
+
+</ion-view>

@@ -1,0 +1,18 @@
+<ion-view view-title="Ukrainian Fashion Week">
+
+    <ion-content class="info-slider">
+
+        <div ng-if="!items.length" class="update-box">
+            <button ng-click="updateSlider()">Завантажити</button>
+        </div>
+        
+        <ion-slide-box>
+            
+            <ion-slide ng-repeat="item in items">
+                <div ng-bind-html="trustAsHtml(item)"></div>
+            </ion-slide>
+            
+        </ion-slide-box>
+ 
+    </ion-content>
+</ion-view>

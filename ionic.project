@@ -1,0 +1,11 @@
+{
+  "name": "UFW",
+  "app_id": "474be4cc",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "12.41.296.5"
+    }
+  ]
+}
