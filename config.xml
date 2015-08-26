@@ -21,7 +21,6 @@
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name='phonegap-version' value='cli-5.1.1' />
   <gap:plugin name='org.crosswalk.engine' version='1.3.0' source='pgb' />
-  <gap:plugin name="org.apache.cordova.whitelist.WhitelistPlugin" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
