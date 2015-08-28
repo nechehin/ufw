@@ -1,7 +1,7 @@
-angular.module('starter.services', [])
+angular.module('ufw.services', [])
 
         
-    .factory('Designers', function ($http, $ionicPopup) {
+    .factory('Designers', function ($http, $ionicPopup, $translate) {
 
         var lsKey = 'Designers';
 
@@ -24,7 +24,7 @@ angular.module('starter.services', [])
                 }, function(){
                     
                     $ionicPopup.alert({
-                        title: 'Помилка з\'єднання'
+                        title: $translate.instant('CONNECTION_ERROR')
                     });
                     
                 }); 
@@ -45,7 +45,7 @@ angular.module('starter.services', [])
         };
     })
     
-    .factory('Schedule', function ($http, $ionicPopup) {
+    .factory('Schedule', function ($http, $ionicPopup, $translate) {
 
         var lsKey = 'Schedule';
 
@@ -76,7 +76,7 @@ angular.module('starter.services', [])
                     errorShow = true;
                     
                     $ionicPopup.alert({
-                        title: 'Помилка з\'єднання'
+                        title: $translate.instant('CONNECTION_ERROR')
                     }).then(function(){
                         errorShow = false;
                     });
@@ -90,11 +90,11 @@ angular.module('starter.services', [])
         };
     })
     
-    .factory('MainSlides', function ($http, $ionicPopup) {
+    .factory('MainSlides', function ($http, $ionicPopup, $translate) {
 
         var lsKey = 'MainSlides';
 
-        var items = JSON.parse(window.localStorage[lsKey] || '[]');
+        var items = JSON.parse(window.localStorage[lsKey] || '{"uk":{},"en":{}}')[ $translate.use() ];
 
         var sourceUrl = 'http://feeds.tochka.net/ufw/';
 
@@ -104,16 +104,16 @@ angular.module('starter.services', [])
 
                 return $http.get(sourceUrl).then(function(response){
                     
-                    items = response.data;
+                    items = response.data[ $translate.use() ];
                     
-                    window.localStorage[lsKey] = JSON.stringify(items);
+                    window.localStorage[lsKey] = JSON.stringify(response.data);
                     
                     return items;
                     
                 }, function(){
                     
                     $ionicPopup.alert({
-                        title: 'Помилка з\'єднання'
+                        title: $translate.instant('CONNECTION_ERROR')
                     });
                     
                 }); 

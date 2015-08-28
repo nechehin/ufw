@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic-material'])
+angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform) {
     
@@ -22,7 +22,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         } else {
             console.log("Google Analytics Unavailable");
         }
-        
+          
     });
 })
 
@@ -86,4 +86,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/info');
 
-});
+})
+
+/**
+ * Translates
+ */
+.config(['$translateProvider', function ($translateProvider) {
+        
+    /**
+     * Disable HTML escaping
+     */    
+    $translateProvider.useSanitizeValueStrategy(null);
+        
+        
+    $translateProvider.translations('uk', {
+        'DESIGNERS': 'Дизайнери',
+        'SCHEDULE': 'Розклад',
+        'SCREENING_SCHEDULE': 'Розклад показів',
+        'LOADING': 'Завантаження',
+        'LOAD': 'Завантажити',
+        'TODAY': 'сьогодні',
+        'CONNECTION_ERROR': 'Помилка з\'єднання'
+    });
+ 
+     $translateProvider.translations('en', {
+        'DESIGNERS': 'Designers',
+        'SCHEDULE': 'Schedule',
+        'SCREENING_SCHEDULE': 'Schedule',
+        'LOAD': 'Load',
+        'TODAY': 'today',
+        'CONNECTION_ERROR': 'Connerction error'
+    });
+ 
+    $translateProvider.preferredLanguage('uk');
+  
+}]);

@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('ufw.controllers', [])
 
 /* Filter for open links in native browser */
 .filter('hrefToJS', function ($sce, $sanitize) {
@@ -14,28 +14,63 @@ angular.module('starter.controllers', [])
  * @param {type} $scope
  * @returns {undefined}
  */
-.controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, $sce, MainSlides) {
+.controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
+    $sce, $translate, $ionicPopup, MainSlides) {
+    
+    /**
+     *  Language change
+     */
+    $scope.changeLanguage = function(lang) {
+        
+        $translate.use(lang);
+        langPopup.close();
+        
+        $scope.items = MainSlides.all();
+
+        $scope.updateSlider = function() {
+            // Start loading animation
+            $ionicLoading.show({
+                template: $translate.instant('LOADING') + '...'
+            });
+
+            MainSlides.load().then(function(){
+                $scope.items = MainSlides.all();
+                $ionicSlideBoxDelegate.update();
+                $ionicLoading.hide(); 
+            });
+        };
+
+        $scope.updateSlider();
+    }
+    
+    var langPopup = $ionicPopup.show({
+        templateUrl: 'templates/lang-popup.html',
+        title: 'Select your language',
+        scope: $scope
+    });
+    
+    
     
     $scope.trustAsHtml = function(string) {
         return $sce.trustAsHtml(string);
     };
 
-    $scope.items = MainSlides.all();
- 
-    $scope.updateSlider = function() {
-        // Start loading animation
-        $ionicLoading.show({
-            template: 'Завантаження...'
-        });
-
-        MainSlides.load().then(function(){
-            $scope.items = MainSlides.all();
-            $ionicSlideBoxDelegate.update();
-            $ionicLoading.hide(); 
-        });
-    };
-    
-    $scope.updateSlider();
+//    $scope.items = MainSlides.all();
+//
+//    $scope.updateSlider = function() {
+//        // Start loading animation
+//        $ionicLoading.show({
+//            template: $translate.instant('LOADING') + '...'
+//        });
+//
+//        MainSlides.load().then(function(){
+//            $scope.items = MainSlides.all();
+//            $ionicSlideBoxDelegate.update();
+//            $ionicLoading.hide(); 
+//        });
+//    };
+//    
+//    $scope.updateSlider();
 })
 
 /**
@@ -53,7 +88,7 @@ angular.module('starter.controllers', [])
         
         // Start loading animation
         $ionicLoading.show({
-            template: 'Завантаження...'
+            template: $translate.instant('LOADING') + '...'
         });
         
         Designers.load().then(function(){
@@ -84,17 +119,20 @@ angular.module('starter.controllers', [])
  * Format date in schedule day tab
  * @returns {Function}
  */
-.filter('formatDate', function () {
+.filter('formatDate', function ($translate) {
     return function (text) {
         
         if (new Date(text).toDateString() === new Date().toDateString()) {
-            return 'сьогодні, ' + text;
+            return $translate.instant('TODAY') + ', ' + text;
         }
 
         return text;
     }
 })
 
+/**
+ * Schedule page
+ */
 .controller('ScheduleCtrl', function($scope, $ionicPlatform, $ionicSlideBoxDelegate, 
     $timeout, $ionicLoading, $ionicPopup, Schedule) {
     
@@ -221,7 +259,7 @@ angular.module('starter.controllers', [])
         
         // Start loading animation
         $ionicLoading.show({
-            template: 'Завантаження...'
+            template: $translate.instant('LOADING') + '...'
         });
         
         Schedule.load().then(function(){

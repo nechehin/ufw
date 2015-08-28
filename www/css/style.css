@@ -225,3 +225,18 @@ ion-list .list {
     left: 16px;
     border-radius: 0;
 }*/
+
+/* Responsive Hero img */
+.hero {
+    position: relative;
+    height: 0;
+    padding-bottom: 72%;
+    overflow: hidden;
+}
+
+.hero img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
