@@ -122,7 +122,7 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
     $translateProvider.preferredLanguage('uk');
     
     // remember language
-    $translateProvider.useLocalStorage();
+    $translateProvider.useCookieStorage();
   
 }])
 

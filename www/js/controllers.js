@@ -26,6 +26,10 @@ angular.module('ufw.controllers', [])
     
     $scope.changeLanguage = function(lang) {
         
+        if ($translate.use() === lang) {
+            return;
+        }
+        
         $translate.use(lang);
         
         if (typeof langPopup !== 'undefined') {
