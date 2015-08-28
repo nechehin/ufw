@@ -15,7 +15,7 @@ angular.module('ufw.controllers', [])
  * @returns {undefined}
  */
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
-    $sce, $translate, $ionicPopup, MainSlides) {
+    $sce, $translate, $STORAGE_KEY, $ionicPopup, MainSlides) {
     
     /**
      *  Language change
@@ -24,30 +24,17 @@ angular.module('ufw.controllers', [])
         
         $translate.use(lang);
         langPopup.close();
-        
-        $scope.items = MainSlides.all();
-
-        $scope.updateSlider = function() {
-            // Start loading animation
-            $ionicLoading.show({
-                template: $translate.instant('LOADING') + '...'
-            });
-
-            MainSlides.load().then(function(){
-                $scope.items = MainSlides.all();
-                $ionicSlideBoxDelegate.update();
-                $ionicLoading.hide(); 
-            });
-        };
 
         $scope.updateSlider();
     }
-    
-    var langPopup = $ionicPopup.show({
-        templateUrl: 'templates/lang-popup.html',
-        title: 'Select your language',
-        scope: $scope
-    });
+ 
+    if (!localStorage.getItem($STORAGE_KEY)) {
+        var langPopup = $ionicPopup.show({
+            templateUrl: 'templates/lang-popup.html',
+            title: 'Select your language',
+            scope: $scope
+        });
+    }
     
     
     
@@ -55,22 +42,22 @@ angular.module('ufw.controllers', [])
         return $sce.trustAsHtml(string);
     };
 
-//    $scope.items = MainSlides.all();
-//
-//    $scope.updateSlider = function() {
-//        // Start loading animation
-//        $ionicLoading.show({
-//            template: $translate.instant('LOADING') + '...'
-//        });
-//
-//        MainSlides.load().then(function(){
-//            $scope.items = MainSlides.all();
-//            $ionicSlideBoxDelegate.update();
-//            $ionicLoading.hide(); 
-//        });
-//    };
-//    
-//    $scope.updateSlider();
+    $scope.items = MainSlides.all();
+
+    $scope.updateSlider = function() {
+        // Start loading animation
+        $ionicLoading.show({
+            template: $translate.instant('LOADING') + '...'
+        });
+
+        MainSlides.load().then(function(){
+            $scope.items = MainSlides.all();
+            $ionicSlideBoxDelegate.update();
+            $ionicLoading.hide(); 
+        });
+    };
+    
+    $scope.updateSlider();
 })
 
 /**

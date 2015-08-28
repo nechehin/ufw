@@ -1,4 +1,4 @@
-angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht.translate'])
+angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht.translate','ngCookies'])
 
 .run(function($ionicPlatform) {
     
@@ -118,6 +118,10 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         'CONNECTION_ERROR': 'Connerction error'
     });
  
+
     $translateProvider.preferredLanguage('uk');
+    
+    // remember language
+    $translateProvider.useLocalStorage();
   
 }]);
