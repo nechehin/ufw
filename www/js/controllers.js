@@ -13,11 +13,13 @@ angular.module('ufw.controllers', [])
  * Main slider
  */
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
-     $translate, $STORAGE_KEY, $ionicPopup, MainSlides) {
+     $translate, $ionicPopup, MainSlides) {
     
     /**
      *  Language change
      */
+    var langStoredKey = 'langIsStored';
+    
     $scope.changeLanguage = function(lang) {
         
         $translate.use(lang);
@@ -29,13 +31,16 @@ angular.module('ufw.controllers', [])
         $ionicSlideBoxDelegate.update();
         $scope.updateSlider();
     }
- 
-    if (!localStorage.getItem($STORAGE_KEY)) {
+
+    if (!localStorage.getItem(langStoredKey)) {
+        
         var langPopup = $ionicPopup.show({
             templateUrl: 'templates/lang-popup.html',
             title: 'Select your language',
             scope: $scope
         });
+        
+        localStorage[langStoredKey] = true;
     }
     
     /**
