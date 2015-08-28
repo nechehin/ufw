@@ -107,7 +107,9 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         'LOADING': 'Завантаження',
         'LOAD': 'Завантажити',
         'TODAY': 'сьогодні',
-        'CONNECTION_ERROR': 'Помилка з\'єднання'
+        'CONNECTION_ERROR': 'Помилка з\'єднання',
+        'SCHEDULE_UPDATED': 'Розклад оновлений',
+        'SCHEDULE_UPDATED_AT': 'Розклад був оновлений о'
     });
  
      $translateProvider.translations('en', {
@@ -116,7 +118,9 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         'SCREENING_SCHEDULE': 'Schedule',
         'LOAD': 'Load',
         'TODAY': 'today',
-        'CONNECTION_ERROR': 'Connerction error'
+        'CONNECTION_ERROR': 'Connerction error',
+        'SCHEDULE_UPDATED': 'Schedule update',
+        'SCHEDULE_UPDATED_AT': 'Schedule was updated at'
     });
  
 

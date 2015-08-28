@@ -83,7 +83,7 @@ angular.module('ufw.controllers', [])
  * @param {type} Designers
  * @returns {undefined}
  */
-.controller('DesignersCtrl', function ($scope, $ionicLoading, Designers) {
+.controller('DesignersCtrl', function ($scope, $ionicLoading, $translate, Designers) {
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Designers');
@@ -123,7 +123,6 @@ angular.module('ufw.controllers', [])
     }
     
     $scope.item = Designers.get($stateParams.designerId);
-
 })
 
 
@@ -146,7 +145,7 @@ angular.module('ufw.controllers', [])
  * Schedule page
  */
 .controller('ScheduleCtrl', function($scope, $ionicSlideBoxDelegate, $timeout, 
-    $ionicLoading, $ionicPopup, Schedule) {
+    $ionicLoading, $ionicPopup, $translate, Schedule) {
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Schedule');
@@ -215,8 +214,8 @@ angular.module('ufw.controllers', [])
                 var m = d.getMinutes();
                 
                 $ionicPopup.alert({
-                    title: 'Розклад оновлений',
-                    template: 'Розклад був оновлений о ' + d.getHours() + ':' + ( m < 10 ? '0' + m : m )
+                    title: $translate.instant('SCHEDULE_UPDATED'),
+                    template: $translate.instant('SCHEDULE_UPDATED_AT') + ' ' + d.getHours() + ':' + ( m < 10 ? '0' + m : m )
                 });
    
             } else {
