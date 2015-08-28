@@ -15,6 +15,10 @@ angular.module('ufw.controllers', [])
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
      $translate, $ionicPopup, MainSlides) {
     
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('UFW');
+    }
+    
     /**
      *  Language change
      */
@@ -32,7 +36,7 @@ angular.module('ufw.controllers', [])
         $scope.updateSlider();
     }
 
-    if (!localStorage.getItem(langStoredKey)) {
+    if (typeof localStorage === 'undefined' || !localStorage.getItem(langStoredKey)) {
         
         var langPopup = $ionicPopup.show({
             templateUrl: 'templates/lang-popup.html',
@@ -40,7 +44,9 @@ angular.module('ufw.controllers', [])
             scope: $scope
         });
         
-        localStorage[langStoredKey] = true;
+        if (typeof localStorage !== 'undefined') {
+            localStorage[langStoredKey] = true;
+        }
     }
     
     /**
@@ -73,6 +79,10 @@ angular.module('ufw.controllers', [])
  * @returns {undefined}
  */
 .controller('DesignersCtrl', function ($scope, $ionicLoading, Designers) {
+    
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('Designers');
+    }
 
     $scope.items = Designers.all();
 
@@ -102,6 +112,10 @@ angular.module('ufw.controllers', [])
 
 .controller('DesignersDetailCtrl', function($scope, $stateParams, Designers) {
 
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('DesignersDetail');
+    }
+    
     $scope.item = Designers.get($stateParams.designerId);
 
 })
@@ -125,8 +139,12 @@ angular.module('ufw.controllers', [])
 /**
  * Schedule page
  */
-.controller('ScheduleCtrl', function($scope, $ionicPlatform, $ionicSlideBoxDelegate, 
-    $timeout, $ionicLoading, $ionicPopup, Schedule) {
+.controller('ScheduleCtrl', function($scope, $ionicSlideBoxDelegate, $timeout, 
+    $ionicLoading, $ionicPopup, Schedule) {
+    
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('Schedule');
+    }
     
     /**
      * Check schedule updates
