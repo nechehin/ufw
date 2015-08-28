@@ -17,7 +17,6 @@ angular.module('ufw.controllers', [])
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('UFW');
-        console.log('trackView UFW');
     }
     
     /**
@@ -88,6 +87,7 @@ angular.module('ufw.controllers', [])
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Designers');
+        console.log('trackView UFW');
     }
 
     $scope.items = Designers.all();
