@@ -11,11 +11,9 @@ angular.module('ufw.controllers', [])
 
 /**
  * Main slider
- * @param {type} $scope
- * @returns {undefined}
  */
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
-    $sce, $translate, $STORAGE_KEY, $ionicPopup, MainSlides) {
+     $translate, $STORAGE_KEY, $ionicPopup, MainSlides) {
     
     /**
      *  Language change
@@ -23,8 +21,12 @@ angular.module('ufw.controllers', [])
     $scope.changeLanguage = function(lang) {
         
         $translate.use(lang);
-        langPopup.close();
-
+        
+        if (typeof langPopup !== 'undefined') {
+            langPopup.close();
+        }
+        
+        $ionicSlideBoxDelegate.update();
         $scope.updateSlider();
     }
  
@@ -36,15 +38,13 @@ angular.module('ufw.controllers', [])
         });
     }
     
-    
-    
-    $scope.trustAsHtml = function(string) {
-        return $sce.trustAsHtml(string);
-    };
-
+    /**
+     * Load main screen
+     */ 
     $scope.items = MainSlides.all();
 
     $scope.updateSlider = function() {
+        
         // Start loading animation
         $ionicLoading.show({
             template: $translate.instant('LOADING') + '...'

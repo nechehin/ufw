@@ -240,3 +240,12 @@ ion-list .list {
     left: 0;
     width: 100%;
 }
+
+/* Slider bullets */
+.slider-pager-page i {
+    color: #888;
+}
+
+.slider-pager-page.active i {
+    color: #e21a22;
+}

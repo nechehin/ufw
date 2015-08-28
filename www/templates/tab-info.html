@@ -9,7 +9,7 @@
         <ion-slide-box>
             
             <ion-slide ng-repeat="item in items">
-                <div ng-bind-html="trustAsHtml(item)"></div>
+                <div compile="item"></div>
             </ion-slide>
             
         </ion-slide-box>
