@@ -18,6 +18,7 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         }
      
         if (typeof analytics !== 'undefined') {
+            console.log("Google Analytics Init");
             analytics.startTrackerWithId("UA-66802256-1");
         } else {
             console.log("Google Analytics Unavailable");

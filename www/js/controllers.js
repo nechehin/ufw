@@ -17,6 +17,7 @@ angular.module('ufw.controllers', [])
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('UFW');
+        console.log('trackView UFW');
     }
     
     /**
@@ -27,6 +28,7 @@ angular.module('ufw.controllers', [])
     $scope.changeLanguage = function(lang) {
         
         if ($translate.use() === lang) {
+            langPopup.close();
             return;
         }
         
