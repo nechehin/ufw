@@ -16,6 +16,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
         }
+     
+        if (typeof analytics !== 'undefined') {
+            analytics.startTrackerWithId("UA-66802256-1");
+        } else {
+            console.log("Google Analytics Unavailable");
+        }
         
     });
 })
