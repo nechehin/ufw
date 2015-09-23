@@ -6,11 +6,11 @@
             
             <h3 class="positive">{{event.title}}</h3>
             
-            <p>Когда: {{event.start_at}}</p>
+            <p>Коли {{event.start_at}}</p>
             
             <div ng-if="location">
-                <p>Где: {{location.title}}</p>
-                <a class="button button-block" href="#/tab/location/{{location.id}}">Где "{{location.title}}" ?</a>
+                <p>Де: {{location.title}}</p>
+                <a class="button button-block" href="#/tab/location/{{location.id}}">Знайти "{{location.title}}" ?</a>
             </div>
             
         </div>
