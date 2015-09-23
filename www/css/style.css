@@ -226,6 +226,7 @@ ion-list .list {
     margin-left: 10px;
     color: #333;
     font-size: 14px;
+    text-transform: uppercase;
     /*float: right;*/
 }
 
