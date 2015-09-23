@@ -2,8 +2,8 @@
 
     <ion-content>
         
-        <ion-scroll zooming="true" direction="xy">
-            <img src="{{location.map}}">
+        <ion-scroll zooming="true" direction="xy" locking="false">
+            <img src="{{location.map}}" imageonload="stopLoading">
         </ion-scroll>
 
     </ion-content>

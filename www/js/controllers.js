@@ -125,13 +125,21 @@ angular.module('ufw.controllers', [])
     
 })
 
-.controller('DesignersDetailCtrl', function($scope, $stateParams, Designers) {
+.controller('DesignersDetailCtrl', function($scope, $stateParams, $ionicLoading, $translate, Designers) {
 
     if (typeof analytics !== 'undefined') {
         analytics.trackView('DesignersDetail');
     }
     
     $scope.item = Designers.get($stateParams.designerId);
+    
+    $ionicLoading.show({
+        template: $translate.instant('LOADING') + '...'
+    });
+    
+    $scope.stopLoading = function() {
+        $ionicLoading.hide();
+    }
 })
 
 
@@ -302,7 +310,6 @@ angular.module('ufw.controllers', [])
     }
     
     // Set and then update locations
-//    $scope.locations = Locations.all();
     Locations.load().then(function(){
         $scope.locations = Locations.all();
     });
@@ -358,7 +365,7 @@ angular.module('ufw.controllers', [])
     
 })
 
-.controller('LocationCtrl', function($scope, $stateParams, Locations) {
+.controller('LocationCtrl', function($scope, $stateParams, $ionicLoading, $translate, Locations) {
 
     if (typeof analytics !== 'undefined') {
         analytics.trackView('LocationDetail');
@@ -366,4 +373,11 @@ angular.module('ufw.controllers', [])
   
     $scope.location = Locations.get($stateParams.locationId);
     
+    $ionicLoading.show({
+        template: $translate.instant('LOADING') + '...'
+    });
+    
+    $scope.stopLoading = function() {
+        $ionicLoading.hide();
+    }
 });
