@@ -10,6 +10,16 @@ angular.module('ufw.controllers', [])
 })
 
 /**
+ * add to object property lang sufix _{lang}
+ * @returns {Function}
+ */
+.filter('lang', function ($translate) {
+    return function (property) {
+        return property + '_' + $translate.use();
+    }
+})
+
+/**
  * Main slider
  */
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
@@ -23,9 +33,9 @@ angular.module('ufw.controllers', [])
      *  Language change
      */
     var langStoredKey = 'langIsStored';
-    
+  
     $scope.changeLanguage = function(lang) {
-        
+       
         if ($translate.use() === lang) {
             langPopup.close();
             return;
@@ -37,8 +47,7 @@ angular.module('ufw.controllers', [])
             langPopup.close();
         }
         
-        $ionicSlideBoxDelegate.update();
-        $scope.updateSlider();
+        location.reload();
     }
 
     if (typeof localStorage === 'undefined' || !localStorage.getItem(langStoredKey)) {
@@ -145,7 +154,7 @@ angular.module('ufw.controllers', [])
  * Schedule page
  */
 .controller('ScheduleCtrl', function($scope, $ionicSlideBoxDelegate, $timeout, 
-    $ionicLoading, $ionicPopup, $translate, Schedule) {
+    $ionicLoading, $ionicPopup, $translate, Schedule, Locations) {
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Schedule');
@@ -292,6 +301,12 @@ angular.module('ufw.controllers', [])
         checkUpdates();
     }
     
+    // Set and then update locations
+//    $scope.locations = Locations.all();
+    Locations.load().then(function(){
+        $scope.locations = Locations.all();
+    });
+    
     // Pull for refresh
     $scope.doRefresh = function () {
 
@@ -311,6 +326,11 @@ angular.module('ufw.controllers', [])
         $ionicSlideBoxDelegate.next();
     }
     
+    $scope.getLocation = function(location_id) {
+        var location = Locations.get(location_id);
+        return location ? location.title : '';
+    }
+    
     
     setInterval(function() {
         
@@ -318,11 +338,32 @@ angular.module('ufw.controllers', [])
             checkUpdates();
         }
         
-    }, 5000);
+    }, 10000);
     
     
     $scope.$on('$ionicView.afterEnter', function(){
         $ionicSlideBoxDelegate.update();
     });
+    
+})
+
+.controller('EventDetailCtrl', function($scope, $stateParams, Schedule, Locations) {
+
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('EventDetail');
+    }
+  
+    $scope.event    = Schedule.getEvent($stateParams.eventId);
+    $scope.location = Locations.get($scope.event.location_id);
+    
+})
+
+.controller('LocationCtrl', function($scope, $stateParams, Locations) {
+
+    if (typeof analytics !== 'undefined') {
+        analytics.trackView('LocationDetail');
+    }
+  
+    $scope.location = Locations.get($stateParams.locationId);
     
 });

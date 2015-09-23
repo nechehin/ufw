@@ -1,0 +1,20 @@
+<ion-view view-title="{{event.title}}">
+
+    <ion-content>
+
+        <div class="content double-padding article">
+            
+            <h3 class="positive">{{event.title}}</h3>
+            
+            <p>Когда: {{event.start_at}}</p>
+            
+            <div ng-if="location">
+                <p>Где: {{location.title}}</p>
+                <a class="button button-block" href="#/tab/location/{{location.id}}">Где "{{location.title}}" ?</a>
+            </div>
+            
+        </div>
+
+    </ion-content>
+
+</ion-view>

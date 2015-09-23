@@ -6,6 +6,10 @@ a {
     color: #e21a22;
 }
 
+.button-block {
+    display: block;
+}
+
 /* HP slider */
 .update-box {
     padding-top: 32px;
@@ -20,6 +24,16 @@ a {
 .info-slider .box {
     height: 100%;
     padding: 16px;
+}
+
+.main-slider ion-slide > div:first-child {
+    height: 100%;
+}
+
+.img-splash {
+    height:100%;
+    background-color: #6F6D78; 
+    background-size: cover;
 }
 
 /* Toolbar */
@@ -242,6 +256,13 @@ ion-list .list {
 }
 
 /* Slider bullets */
+.slider-pager {
+    bottom: 0;
+    height: auto;
+    padding: 10px 0;
+    background-color: rgba(255,255,255,0.7);
+}
+
 .slider-pager-page i {
     color: #888;
 }

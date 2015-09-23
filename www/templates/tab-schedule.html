@@ -19,15 +19,18 @@
                     
                     <ion-list class="events">
 
-                        <ion-item class="item" ng-repeat="event in day.events" ng-class="eventClass(event)">
+                        <ion-item class="item" ng-repeat="event in day.events" ng-class="eventClass(event)"
+                                   href="#/tab/schedule/{{event.id}}">
                             <h2>
                                 {{event.time}} 
-                                <span class="location" ng-if="event.location.length">
+                                <span class="location" ng-if="event.location_id">
                                     <i class="ion-ios-location"></i>
-                                    {{event.location}} 
+                                    {{getLocation(event.location_id)}} 
                                 </span>
                             </h2>
+                            
                             <p>{{event.title}}</p>
+                            
                         </ion-item>
 
                     </ion-list>

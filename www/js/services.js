@@ -1,3 +1,24 @@
+/**
+ * Create properties without lang sufix for multilang properties
+ * @param {object} items
+ * @param {string} lang
+ * @returns {object}
+ */
+function storeTranslations(items, lang) {
+            
+    var langSufix = '_' + lang;
+
+    for (var i in items) {
+        for (var property in items[i]) {
+            if (property.indexOf(langSufix) >= 0) {
+                items[i][property.replace(langSufix, '')] = items[i][property];
+            }
+        }
+    }
+    
+    return items;
+}
+
 angular.module('ufw.services', [])
 
         
@@ -6,9 +27,11 @@ angular.module('ufw.services', [])
         var lsKey = 'Designers';
 
         var items = JSON.parse(window.localStorage[lsKey] || '[]');
+        
+        items = storeTranslations(items, $translate.use());
 
-        var sourceUrl = 'http://feeds.tochka.net/ua/ufw/designers/';
-
+        var sourceUrl = 'http://feeds.tochka.net/ufw/designers/';
+        
         return {
             
             load: function() {
@@ -18,6 +41,8 @@ angular.module('ufw.services', [])
                     items = response.data;
                     
                     window.localStorage[lsKey] = JSON.stringify(items);
+                    
+                    items = storeTranslations(items, $translate.use());
                     
                     return items;
                     
@@ -50,6 +75,10 @@ angular.module('ufw.services', [])
         var lsKey = 'Schedule';
 
         var days = JSON.parse(window.localStorage[lsKey] || '[]');
+        
+        for (var i in days) {
+            days[i].events = storeTranslations(days[i].events, $translate.use());
+        }
 
         var sourceUrl = 'http://feeds.tochka.net/ufw/schedule/';
 
@@ -62,6 +91,10 @@ angular.module('ufw.services', [])
                 return $http.get(sourceUrl).then(function(response){
                     
                     days = response.data;
+                    
+                    for (var i in days) {
+                        days[i].events = storeTranslations(days[i].events, $translate.use());
+                    }
                     
                     window.localStorage[lsKey] = JSON.stringify(days);
                     
@@ -86,6 +119,16 @@ angular.module('ufw.services', [])
             
             all: function () {
                 return days;
+            },
+            
+            getEvent: function(id) {
+                for (var i in days) {
+                    for (var n in days[i].events) {
+                        if (days[i].events[n].id == id) {
+                            return days[i].events[n];
+                        }
+                    }
+                }
             }
         };
     })
@@ -121,6 +164,54 @@ angular.module('ufw.services', [])
             
             all: function () {
                 return items;
+            }
+        };
+    })
+    
+    .factory('Locations', function ($http, $ionicPopup, $translate) {
+
+        var lsKey = 'Locations';
+
+        var items = JSON.parse(window.localStorage[lsKey] || '[]');
+        
+        items = storeTranslations(items, $translate.use());
+
+        var sourceUrl = 'http://feeds.tochka.net/ufw/locations/';
+        
+        return {
+            
+            load: function() {
+
+                return $http.get(sourceUrl).then(function(response){
+                    
+                    items = response.data;
+                    
+                    window.localStorage[lsKey] = JSON.stringify(items);
+                    
+                    items = storeTranslations(items, $translate.use());
+                    
+                    return items;
+                    
+                }, function(){
+                    
+                    $ionicPopup.alert({
+                        title: $translate.instant('CONNECTION_ERROR')
+                    });
+                    
+                }); 
+            },
+            
+            all: function () {
+                return items;
+            },
+            
+            get: function (locationId) {
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].id === parseInt(locationId)) {
+                        return items[i];
+                    }
+                }
+                return null;
             }
         };
     });

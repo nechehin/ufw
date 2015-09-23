@@ -82,6 +82,26 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
                 controller: 'ScheduleCtrl'
             }
         }
+    })
+    
+    .state('tab.event-detail', {
+        url: '/schedule/:eventId',
+        views: {
+            'tab-schedule': {
+                templateUrl: 'templates/event-detail.html',
+                controller: 'EventDetailCtrl'
+            }
+        }
+    })
+    
+    .state('tab.location-detail', {
+        url: '/location/:locationId',
+        views: {
+            'tab-schedule': {
+                templateUrl: 'templates/location-detail.html',
+                controller: 'LocationCtrl'
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback
