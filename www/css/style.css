@@ -67,6 +67,15 @@ ion-header-bar.bar.bar-header .button + .title {
     box-shadow: none;
 }
 
+.button.back-button.header-item {
+    margin-left: 5px;
+}
+
+ion-header-bar.bar.bar-header .title.title-center {
+    text-align: center;
+    right: 35px;
+}
+
 /* Tabs */
 
 .tabs-top > .tabs, 
