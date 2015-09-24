@@ -17,8 +17,7 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreen" value="resources/splash.jpg" />
-  <preference name="SplashScreen" value="screen"/>
+  <preference name="SplashScreen" value="splash.png" />
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="phonegap-version" value="cli-5.2.0"/>
   
