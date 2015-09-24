@@ -17,6 +17,7 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="SplashScreen" value="images/browser/splash.jpg" />
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="phonegap-version" value="cli-5.2.0"/>
@@ -41,7 +42,7 @@
   <icon src="icon-120.png" width="120" height="120" gap:platform="ios"/>
   <icon src="icon-152.png" width="152" height="152" gap:platform="ios"/>
   
-  <splash src="splash.png"/>
-  <gap:splash src="splash.png"/>
+  <!--splash src="splash.png"/-->
+  <!--gap:splash src="splash.png"/-->
   
 </widget>
