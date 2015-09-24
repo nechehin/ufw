@@ -26,8 +26,14 @@ angular.module('ufw.controllers', [])
      $translate, $ionicPopup, MainSlides) {
     
     if (typeof analytics !== 'undefined') {
-        analytics.trackView('UFW');
+        analytics.trackView('Main');
     }
+    
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Main', 'View'); 
+        }
+    });
     
     /**
      *  Language change
@@ -39,6 +45,10 @@ angular.module('ufw.controllers', [])
         if ($translate.use() === lang) {
             langPopup.close();
             return;
+        }
+        
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Language', 'Select', lang); 
         }
         
         $translate.use(lang);
@@ -96,8 +106,13 @@ angular.module('ufw.controllers', [])
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Designers');
-        console.log('trackView UFW');
     }
+    
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Designers', 'List'); 
+        }
+    });
 
     $scope.items = Designers.all();
 
@@ -131,6 +146,12 @@ angular.module('ufw.controllers', [])
         analytics.trackView('DesignersDetail');
     }
     
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Designers', 'View', $scope.item.name); 
+        }
+    });
+
     $scope.item = Designers.get($stateParams.designerId);
     
     $ionicLoading.show({
@@ -167,6 +188,12 @@ angular.module('ufw.controllers', [])
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Schedule');
     }
+    
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Schedule', 'List'); 
+        }
+    });
     
     /**
      * Check schedule updates
@@ -359,10 +386,15 @@ angular.module('ufw.controllers', [])
     if (typeof analytics !== 'undefined') {
         analytics.trackView('EventDetail');
     }
+    
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Schedule', 'View', $scope.event.title); 
+        }
+    });
   
     $scope.event    = Schedule.getEvent($stateParams.eventId);
     $scope.location = Locations.get($scope.event.location_id);
-    
 })
 
 .controller('LocationCtrl', function($scope, $stateParams, $ionicLoading, $translate, Locations) {
@@ -370,6 +402,12 @@ angular.module('ufw.controllers', [])
     if (typeof analytics !== 'undefined') {
         analytics.trackView('LocationDetail');
     }
+    
+    $scope.$on('$ionicView.enter', function() {
+        if (typeof analytics !== 'undefined') { 
+            analytics.trackEvent('Schedule', 'Location', $scope.location.title); 
+        }
+    });
   
     $scope.location = Locations.get($stateParams.locationId);
     
