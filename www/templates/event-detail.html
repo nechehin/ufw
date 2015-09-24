@@ -6,11 +6,17 @@
             
             <h3 class="positive">{{event.title}}</h3>
             
-            <p>Коли: {{event.start_at}}</p>
+            <p>{{ 'WHEN' | translate }}: {{event.start_at}}</p>
             
             <div ng-if="location">
-                <p>Де: {{location.title}}</p>
-                <a class="button button-block" href="#/tab/location/{{location.id}}">Знайти "{{location.title}}" ?</a>
+                
+                <p>{{ 'WHERE' | translate }}: {{location.title}}</p>
+                
+                <a href="#/tab/location/{{location.id}}" ng-if="location.map" class="map-thumb">
+                    <img ng-src="{{location.map}}">
+                    {{ 'CLICK_TO_ZOOM' | translate }}
+                </a>
+                
             </div>
             
         </div>

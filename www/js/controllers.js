@@ -23,7 +23,7 @@ angular.module('ufw.controllers', [])
  * Main slider
  */
 .controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
-     $translate, $ionicPopup, MainSlides) {
+     $translate, $ionicPopup, $timeout, MainSlides) {
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('UFW');
@@ -47,7 +47,10 @@ angular.module('ufw.controllers', [])
             langPopup.close();
         }
         
-        location.reload();
+        $timeout(function(){
+            location.reload();
+        }, 400);
+        
     }
 
     if (typeof localStorage === 'undefined' || !localStorage.getItem(langStoredKey)) {

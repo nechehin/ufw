@@ -4,8 +4,6 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
     
     $ionicPlatform.ready(function() {
         
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
@@ -29,10 +27,6 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
     $stateProvider
 
     // setup an abstract state for the tabs directive
@@ -129,7 +123,10 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         'TODAY': 'сьогодні',
         'CONNECTION_ERROR': 'Помилка з\'єднання',
         'SCHEDULE_UPDATED': 'Розклад оновлений',
-        'SCHEDULE_UPDATED_AT': 'Розклад був оновлений о'
+        'SCHEDULE_UPDATED_AT': 'Розклад був оновлений о',
+        'CLICK_TO_ZOOM': 'Натисніть для збільшення',
+        'WHEN': 'Коли',
+        'WHERE': 'Де'
     });
  
      $translateProvider.translations('en', {
@@ -140,7 +137,10 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         'TODAY': 'today',
         'CONNECTION_ERROR': 'Connerction error',
         'SCHEDULE_UPDATED': 'Schedule update',
-        'SCHEDULE_UPDATED_AT': 'Schedule was updated at'
+        'SCHEDULE_UPDATED_AT': 'Schedule was updated at',
+        'CLICK_TO_ZOOM': 'Zoom in',
+        'WHEN': 'When',
+        'WHERE': 'Location'
     });
  
 
