@@ -41,7 +41,7 @@
   <icon src="icon-120.png" width="120" height="120" gap:platform="ios"/>
   <icon src="icon-152.png" width="152" height="152" gap:platform="ios"/>
   
-  <splash src="splash.png"/>
-  <gap:splash src="splash.png"/>
+  <splash src="/resources/splash.png"/>
+  <gap:splash src="/resources/splash.png"/>
   
 </widget>
