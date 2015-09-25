@@ -42,14 +42,14 @@
   <icon src="icon-120.png" width="120" height="120" gap:platform="ios"/>
   <icon src="icon-152.png" width="152" height="152" gap:platform="ios"/>
   
-  <splash src="splash.png"/>
+  <splash src="splash.png" gap:platform="android"/>
   <!--gap:splash src="splash.png" gap:platform="android"/-->
   
-  <platform name="android"> 
+  <!--platform name="android"> 
     <splash src="splash.png" density="land-hdpi"/>
     <splash src="splash.png" density="land-ldpi"/>
     <splash src="splash.png" density="land-mdpi"/>
     <splash src="splash.png" density="land-xhdpi"/> 
-  </platform>
+  </platform-->
   
 </widget>
