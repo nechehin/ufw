@@ -23,7 +23,8 @@
   
   <gap:plugin name="org.crosswalk.engine" source="pgb" version="1.3.0"/>
   <gap:plugin name="cordova-plugin-legacy-whitelist" source="npm"/>
-  <gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
+  <!--gap:plugin name="cordova-plugin-splashscreen" source="npm"/-->
+  <gap:plugin name="br.com.paveisitemas.splashscreen" version="2.1.1" />
   <gap:plugin name="com.danielcwilson.plugins.googleanalytics" version="0.6.1"/>
   <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
   
