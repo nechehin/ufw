@@ -43,7 +43,7 @@
   <icon src="icon-120.png" width="120" height="120" gap:platform="ios"/>
   <icon src="icon-152.png" width="152" height="152" gap:platform="ios"/>
   
-  <gap:splash src="res/screen/splash.jpg" />
+  <gap:splash src="res/screen/splash.png" />
   <!--gap:splash src="res/screen/android/screen-ldpi-portrait.png" gap:platform="android" gap:qualifier="port-ldpi"/>
   <gap:splash src="res/screen/android/screen-mdpi-portrait.png" gap:platform="android" gap:qualifier="port-mdpi"/>
   <gap:splash src="res/screen/android/screen-hdpi-portrait.png" gap:platform="android" gap:qualifier="port-hdpi"/>
