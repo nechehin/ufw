@@ -47,6 +47,7 @@
     <icon src="icon-72@2x.png" width="152" height="152" gap:platform="ios"/>
     <icon src="icon-76.png" width="76" height="76" gap:platform="ios"/>
     <icon src="icon-76@2x.png" width="152" height="152" gap:platform="ios"/>
+    <icon src="icon-152.png" width="152" height="152" gap:platform="ios" />
 
   
     <gap:splash src="res/screen/android/drawable-port-xhdpi-screen.png" />
