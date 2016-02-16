@@ -2,6 +2,11 @@
     
     <ion-content class="events-box" overflow-scroll="true">
         
+        <!-- Show if data not loaded -->
+        <center ng-if="!days.length" class="padding">
+            <button ng-click="loadSchedule()">{{ 'LOAD' | translate }}</button>
+        </center>
+        
         <!-- Navigation buttons -->
         <a class="prev-day" ng-show="days.length"><i class="ion-ios-arrow-back"></i></a>
         <a class="next-day" ng-show="days.length"><i class="ion-ios-arrow-forward"></i></a>
@@ -37,9 +42,10 @@
                 </ion-content>
                 
             </ion-slide-page>
-           
+                       
         </ion-slides>
-
+                
+        
     </ion-content>
     
 </ion-view>

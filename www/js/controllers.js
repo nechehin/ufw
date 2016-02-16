@@ -106,6 +106,8 @@ angular.module('ufw.controllers', [])
  */
 .controller('DesignersCtrl', function ($scope, $ionicLoading, $translate, Designers) {
     
+    var isLoading = false;
+    
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Designers');
     }
@@ -120,6 +122,8 @@ angular.module('ufw.controllers', [])
 
     if (!$scope.items.length) {
         
+        isLoading = true;
+        
         // Start loading animation
         $ionicLoading.show({
             template: $translate.instant('LOADING') + '...'
@@ -128,15 +132,37 @@ angular.module('ufw.controllers', [])
         Designers.load().then(function(){
             $scope.items = Designers.all();
             $ionicLoading.hide(); 
+            isLoading = false;
         });
     }
 
     // Pull for refresh
-    $scope.doRefresh = function () {
+    $scope.doRefresh = function (withLoadIndicator) {
+        
+        var withLoadIndicator = withLoadIndicator || false;
+        
+        if (isLoading) {
+            return false;
+        }
+        
+        isLoading = true;
+        
+        if (withLoadIndicator) {
+            $ionicLoading.show({
+                template: $translate.instant('LOADING') + '...'
+            });
+        }
 
         Designers.load().then(function(){
+            
             $scope.items = Designers.all();
             $scope.$broadcast('scroll.refreshComplete');
+            
+            if (withLoadIndicator) {
+                $ionicLoading.hide();
+            }
+            
+            isLoading = false;
         });
     };
     
@@ -188,6 +214,7 @@ angular.module('ufw.controllers', [])
     $translate, Schedule, Locations) {
     
     var alertVisible = false;
+    var isLoading = false;
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Schedule');
@@ -208,7 +235,6 @@ angular.module('ufw.controllers', [])
         nextButton: '.next-day',
         onInit: function(swiper){
             $scope.slider = swiper;
-//            console.log('init');
         }
     };
     
@@ -220,7 +246,13 @@ angular.module('ufw.controllers', [])
      */
     function checkUpdates() {
         
-        Schedule.load().then(function(){
+        if (isLoading) {
+            return;
+        }
+        
+        isLoading = true;
+        
+        Schedule.load(true).then(function(){
             
             var days = Schedule.all();
             var needUpdate = false;            
@@ -270,7 +302,6 @@ angular.module('ufw.controllers', [])
                 console.log('need update');
                 
                 $scope.days = days;
-//                $ionicSlideBoxDelegate.update();
                 $scope.slider.update();
                 
                 var d = new Date();
@@ -283,7 +314,7 @@ angular.module('ufw.controllers', [])
                     $ionicPopup.alert({
                         title: $translate.instant('SCHEDULE_UPDATED'),
                         template: $translate.instant('SCHEDULE_UPDATED_AT') + ' ' + d.getHours() + ':' + ( m < 10 ? '0' + m : m )
-                    }).then(function(){console.log('t');
+                    }).then(function(){
                         alertVisible = false;
                     });
 
@@ -292,7 +323,11 @@ angular.module('ufw.controllers', [])
             } else {
                 console.log('do not update');
             }
+            
+            isLoading = false;
+            
         });
+        
     };
     
     
@@ -339,10 +374,14 @@ angular.module('ufw.controllers', [])
     }
     
     
-    $scope.days = Schedule.all();
-    
-    if (!$scope.days.length) {
+    $scope.loadSchedule = function() {
         
+        if (isLoading) {
+            return;
+        }
+        
+        isLoading = true;
+     
         // Start loading animation
         $ionicLoading.show({
             template: $translate.instant('LOADING') + '...'
@@ -360,7 +399,17 @@ angular.module('ufw.controllers', [])
                 slideToToday();
             }, 200);            
             
+            isLoading = false;
+            
         });
+        
+    }
+    
+    $scope.days = Schedule.all();
+    
+    if (!$scope.days.length) {
+        
+        $scope.loadSchedule();
         
     } else {
         
@@ -373,24 +422,6 @@ angular.module('ufw.controllers', [])
         $scope.locations = Locations.all();
     });
     
-    // Pull for refresh
-//    $scope.doRefresh = function () {
-//
-//        Schedule.load().then(function(){
-//            $scope.days = Schedule.all();
-////            $ionicSlideBoxDelegate.update();
-//            $scope.$broadcast('scroll.refreshComplete');
-//        });
-//    };
-    
-
-//    $scope.prevDay = function() {
-//        $ionicSlideBoxDelegate.previous();
-//    }
-//    
-//    $scope.nextDay = function() {
-//        $ionicSlideBoxDelegate.next();
-//    }
     
     $scope.getLocation = function(location_id) {
         var location = Locations.get(location_id);
@@ -404,12 +435,7 @@ angular.module('ufw.controllers', [])
             checkUpdates();
         }
         
-    }, 10000);
-    
-    
-//    $scope.$on('$ionicView.afterEnter', function(){
-////        $ionicSlideBoxDelegate.update();
-//    });
+    }, 20000);
     
 })
 

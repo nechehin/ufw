@@ -36,7 +36,7 @@ angular.module('ufw.services', [])
             
             load: function() {
 
-                return $http.get(sourceUrl).then(function(response){
+                return $http.get(sourceUrl, { timeout: 10000 }).then(function(response){
                     
                     items = response.data;
                     
@@ -86,9 +86,11 @@ angular.module('ufw.services', [])
 
         return {
             
-            load: function() {
+            load: function(silent) {
+                
+                var silent = silent || false;
 
-                return $http.get(sourceUrl).then(function(response){
+                return $http.get(sourceUrl, { timeout: 10000 }).then(function(response){
                     
                     days = response.data;
                     
@@ -101,6 +103,10 @@ angular.module('ufw.services', [])
                     return days;
                     
                 }, function(){
+                    
+                    if (silent) {
+                        return;
+                    }
                     
                     if (errorShow) {
                         return;
@@ -145,7 +151,7 @@ angular.module('ufw.services', [])
             
             load: function() {
 
-                return $http.get(sourceUrl).then(function(response){
+                return $http.get(sourceUrl, { timeout: 10000 }).then(function(response){
                     
                     items = response.data[ $translate.use() ];
                     

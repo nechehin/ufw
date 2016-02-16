@@ -17,6 +17,10 @@
             
         </ion-list>
         
+        <center>
+            <button ng-if="!items.length" ng-click="doRefresh(true)">{{ 'LOAD' | translate }}</button>
+        </center>
+        
     </ion-content>
     
 </ion-view>
