@@ -1,9 +1,9 @@
 <ion-view view-title="{{location.title}}">
 
-    <ion-content>
+    <ion-content scroll="false">
         
-        <ion-scroll zooming="true" direction="xy" locking="false">
-            <img src="{{location.map}}" imageonload="stopLoading">
+        <ion-scroll zooming="true" min-zoom="1" direction="xy" delegate-handle="mapzoom" class="map-scrollbox">
+            <img src="{{location.map}}" imageonload="stopLoading" id="location-map">
         </ion-scroll>
 
     </ion-content>

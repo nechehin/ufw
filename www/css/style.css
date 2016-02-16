@@ -23,19 +23,22 @@ a {
 
 .info-slider .box {
     height: 100%;
-    padding: 16px;
-}
-
-.main-slider ion-slide > div:first-child {
-    height: 100%;
+    padding: 16px 16px 50px 16px;
 }
 
 .img-splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height:100%;
-    background-color: #6F6D78; 
-    background-size: cover;
-    background-position: center top;
+    background-color: #651317; 
+    background-position: center center;
+    background-size: auto 100%;
+    background-image: url(../img/UFW_portrait.jpg);
+    background-repeat: no-repeat;
 }
+
 
 /* Toolbar */
 ion-header-bar.bar {
@@ -158,6 +161,37 @@ ion-list .list {
 }
 
 /* Calendar */
+.events-box ion-content {
+    top: 56px;
+}
+
+.events-box .prev-day,
+.events-box .next-day {
+    position: absolute;
+    display: block;
+    top: 0;
+    padding: 19px 16px;
+    color: #444;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.events-box .prev-day {
+    left: 8px;
+}
+
+.events-box .next-day {
+    right: 8px;
+}
+
+.events-box .swiper-button-disabled {
+    display: none;
+}
+
+.events-box .swiper-pagination {
+    display: none;
+}
+
 .nav-days {
     position: relative;
     height: 56px;
@@ -169,34 +203,6 @@ ion-list .list {
     color: #444;
     z-index: 2;
     overflow: hidden;
-}
-
-.nav-days .arrow-left,
-.nav-days .arrow-right {
-    position: absolute;
-    display: block;
-    top: 0;
-    padding: 19px 16px;
-    color: #444;
-    font-size: 16px;
-}
-
-.nav-days .arrow-left {
-    left: 8px;
-}
-
-.nav-days .arrow-right {
-    right: 8px;
-}
-
-.nav-days.first .arrow-left,
-.nav-days.last .arrow-right {
-    display: none;
-}
-
-.events .list {
-    padding-top: 64px;
-    padding-bottom: 50px;
 }
 
 .events .list .past h2,
@@ -232,6 +238,13 @@ ion-list .list {
     max-width: 100%;
 }
 
+/* Location map page */
+.map-scrollbox {
+    width: 100%;
+    height: 100%;
+}
+
+
 /* Responsive Hero img */
 .hero {
     position: relative;
@@ -248,17 +261,12 @@ ion-list .list {
 }
 
 /* Slider bullets */
-.slider-pager {
-    bottom: 0;
-    height: auto;
-    padding: 10px 0;
-    background-color: rgba(255,255,255,0.7);
+.swiper-pagination-bullet {
+    background: #e21a22;
+    opacity: 0.4;
+    box-shadow: 0px 0px 5px #fff;
 }
 
-.slider-pager-page i {
-    color: #888;
-}
-
-.slider-pager-page.active i {
-    color: #e21a22;
+.swiper-pagination-bullet-active {
+    opacity: 1;
 }

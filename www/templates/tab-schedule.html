@@ -1,21 +1,20 @@
 <ion-view view-title="{{ 'SCREENING_SCHEDULE' | translate }}">
     
-    <ion-content class="info-slider">
+    <ion-content class="events-box" overflow-scroll="true">
+        
+        <!-- Navigation buttons -->
+        <a class="prev-day" ng-show="days.length"><i class="ion-ios-arrow-back"></i></a>
+        <a class="next-day" ng-show="days.length"><i class="ion-ios-arrow-forward"></i></a>
 
-        <ion-slide-box show-pager="false" on-slide-changed="dayChange($index)">
-            
-            <ion-slide ng-repeat="day in days">
+        <ion-slides options="sliderOptions">
+   
+            <ion-slide-page ng-repeat="day in days">
                 
-                <div class="nav-days" ng-class="{'first': $first, 'last': $last}">
-                    <a class="arrow-left" ng-click="prevDay()"><i class="ion-ios-arrow-back"></i></a>
-                    <a class="arrow-right" ng-click="nextDay()"><i class="ion-ios-arrow-forward"></i></a>
+                <div class="nav-days">
                     {{day.date | formatDate}}
                 </div>
                 
                 <ion-content>
-                    
-                    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
-                    </ion-refresher>
                     
                     <ion-list class="events">
 
@@ -34,12 +33,13 @@
                         </ion-item>
 
                     </ion-list>
+                    
                 </ion-content>
                 
-            </ion-slide>
+            </ion-slide-page>
            
-        </ion-slide-box>
-        
+        </ion-slides>
+
     </ion-content>
     
 </ion-view>

@@ -92,7 +92,9 @@ angular.module('ufw.controllers', [])
         });
     };
     
-    $scope.updateSlider();
+    if (!$scope.items.length) {
+        $scope.updateSlider();
+    }
 })
 
 /**
@@ -182,8 +184,10 @@ angular.module('ufw.controllers', [])
 /**
  * Schedule page
  */
-.controller('ScheduleCtrl', function($scope, $ionicSlideBoxDelegate, $timeout, 
-    $ionicLoading, $ionicPopup, $translate, Schedule, Locations) {
+.controller('ScheduleCtrl', function($scope,  $timeout, $ionicLoading, $ionicPopup, 
+    $translate, Schedule, Locations) {
+    
+    var alertVisible = false;
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Schedule');
@@ -195,6 +199,21 @@ angular.module('ufw.controllers', [])
         }
     });
     
+    $scope.showPager = false;
+
+    $scope.sliderOptions = {
+        loop: false,
+        pagination: false,
+        prevButton: '.prev-day',
+        nextButton: '.next-day',
+        onInit: function(swiper){
+            $scope.slider = swiper;
+//            console.log('init');
+        }
+    };
+    
+
+    
     /**
      * Check schedule updates
      * @returns {void}
@@ -204,8 +223,7 @@ angular.module('ufw.controllers', [])
         Schedule.load().then(function(){
             
             var days = Schedule.all();
-            var needUpdate = false;
-            
+            var needUpdate = false;            
 
             if (days.length !== $scope.days.length) {
                 needUpdate = true;
@@ -252,16 +270,25 @@ angular.module('ufw.controllers', [])
                 console.log('need update');
                 
                 $scope.days = days;
-                $ionicSlideBoxDelegate.update();
+//                $ionicSlideBoxDelegate.update();
+                $scope.slider.update();
                 
                 var d = new Date();
                 var m = d.getMinutes();
                 
-                $ionicPopup.alert({
-                    title: $translate.instant('SCHEDULE_UPDATED'),
-                    template: $translate.instant('SCHEDULE_UPDATED_AT') + ' ' + d.getHours() + ':' + ( m < 10 ? '0' + m : m )
-                });
-   
+                if (!alertVisible) {
+                    
+                    alertVisible = true;
+
+                    $ionicPopup.alert({
+                        title: $translate.instant('SCHEDULE_UPDATED'),
+                        template: $translate.instant('SCHEDULE_UPDATED_AT') + ' ' + d.getHours() + ':' + ( m < 10 ? '0' + m : m )
+                    }).then(function(){console.log('t');
+                        alertVisible = false;
+                    });
+
+                }
+                
             } else {
                 console.log('do not update');
             }
@@ -280,7 +307,7 @@ angular.module('ufw.controllers', [])
             if (new Date($scope.days[i].date).toDateString() === new Date().toDateString()) {
 
                 $timeout(function(){
-                    $ionicSlideBoxDelegate.slide(i);
+                    $scope.slider.slideTo(i);
                 }, 200);
                 
                 break;
@@ -324,12 +351,17 @@ angular.module('ufw.controllers', [])
         Schedule.load().then(function(){
             
             $scope.days = Schedule.all();
-            $ionicSlideBoxDelegate.update();
-                        
-            slideToToday();
             
             $ionicLoading.hide(); 
+            
+            $scope.slider.update();
+
+            $timeout(function(){
+                slideToToday();
+            }, 200);            
+            
         });
+        
     } else {
         
         slideToToday();
@@ -342,23 +374,23 @@ angular.module('ufw.controllers', [])
     });
     
     // Pull for refresh
-    $scope.doRefresh = function () {
-
-        Schedule.load().then(function(){
-            $scope.days = Schedule.all();
-            $ionicSlideBoxDelegate.update();
-            $scope.$broadcast('scroll.refreshComplete');
-        });
-    };
+//    $scope.doRefresh = function () {
+//
+//        Schedule.load().then(function(){
+//            $scope.days = Schedule.all();
+////            $ionicSlideBoxDelegate.update();
+//            $scope.$broadcast('scroll.refreshComplete');
+//        });
+//    };
     
 
-    $scope.prevDay = function() {
-        $ionicSlideBoxDelegate.previous();
-    }
-    
-    $scope.nextDay = function() {
-        $ionicSlideBoxDelegate.next();
-    }
+//    $scope.prevDay = function() {
+//        $ionicSlideBoxDelegate.previous();
+//    }
+//    
+//    $scope.nextDay = function() {
+//        $ionicSlideBoxDelegate.next();
+//    }
     
     $scope.getLocation = function(location_id) {
         var location = Locations.get(location_id);
@@ -375,9 +407,9 @@ angular.module('ufw.controllers', [])
     }, 10000);
     
     
-    $scope.$on('$ionicView.afterEnter', function(){
-        $ionicSlideBoxDelegate.update();
-    });
+//    $scope.$on('$ionicView.afterEnter', function(){
+////        $ionicSlideBoxDelegate.update();
+//    });
     
 })
 
@@ -397,7 +429,8 @@ angular.module('ufw.controllers', [])
     $scope.location = Locations.get($scope.event.location_id);
 })
 
-.controller('LocationCtrl', function($scope, $stateParams, $ionicLoading, $translate, Locations) {
+.controller('LocationCtrl', function($scope, $state, $ionicHistory, $stateParams, $ionicLoading, 
+    $translate, $ionicScrollDelegate, $ionicPopup, Locations) {
 
     if (typeof analytics !== 'undefined') {
         analytics.trackView('LocationDetail');
@@ -409,13 +442,53 @@ angular.module('ufw.controllers', [])
         }
     });
   
-    $scope.location = Locations.get($stateParams.locationId);
-    
+  
     $ionicLoading.show({
         template: $translate.instant('LOADING') + '...'
     });
     
+    
+    $scope.location = Locations.get($stateParams.locationId);    
+    
+    if (!$scope.location) {
+        
+        Locations.load().then(function(){
+            
+            $scope.location = Locations.get($stateParams.locationId);
+      
+            if (!$scope.location) {
+                
+                $ionicLoading.hide();
+          
+                $ionicPopup.alert({
+                    title: 'Location not found ('
+                }).then(function(){
+                    
+                    // Go to parent view on error
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                    
+                    $state.go('tab.schedule');
+                });
+                
+            }
+            
+        });
+    }    
+    
+    
+    /**
+     * Map image loaded event handler
+     * 
+     * @returns {void}
+     */
     $scope.stopLoading = function() {
+        
+        document.getElementById('location-map').style.width = (screen.width * 2) + "px";
+        
         $ionicLoading.hide();
+        $ionicScrollDelegate.$getByHandle('mapzoom').resize();
     }
+    
 });

@@ -2,17 +2,42 @@
 
     <ion-content class="info-slider main-slider">
 
-        <div ng-if="!items.length" class="update-box">
-            <button ng-click="updateSlider()">{{ 'LOAD' | translate }}</button>
-        </div>
-        
-        <ion-slide-box>
+        <ion-slides>
             
-            <ion-slide ng-repeat="item in items">
-                <div compile="item"></div>
-            </ion-slide>
             
-        </ion-slide-box>
+            <!-- First slide with splash screen -->
+            <ion-slide-page>
+                
+                <div class="img-splash"></div>
+                
+            </ion-slide-page>
+            
+            
+            <!-- Show if data not loaded -->
+            <ion-slide-page ng-if="!items.length">
+                
+                <ion-content class="padding">
+                    
+                    <button ng-click="updateSlider()">{{ 'LOAD' | translate }}</button>
+                    
+                </ion-content>
+                
+            </ion-slide-page>
+            
+            
+            <!-- Aditional data -->
+            <ion-slide-page ng-repeat="item in items">
+                
+                <ion-content>
+                    
+                    <div compile="item"></div>
+                    
+                </ion-content>
+                
+            </ion-slide-page>
+            
+        </ion-slides>
  
     </ion-content>
+    
 </ion-view>

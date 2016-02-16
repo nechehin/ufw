@@ -26,7 +26,7 @@ angular.module('ufw.services', [])
 
         var lsKey = 'Designers';
 
-        var items = JSON.parse(window.localStorage[lsKey] || '[]');
+        var items = ls.get(lsKey, []);
         
         items = storeTranslations(items, $translate.use());
 
@@ -40,7 +40,7 @@ angular.module('ufw.services', [])
                     
                     items = response.data;
                     
-                    window.localStorage[lsKey] = JSON.stringify(items);
+                    ls.set(lsKey, items, 900);
                     
                     items = storeTranslations(items, $translate.use());
                     
@@ -74,7 +74,7 @@ angular.module('ufw.services', [])
 
         var lsKey = 'Schedule';
 
-        var days = JSON.parse(window.localStorage[lsKey] || '[]');
+        var days = ls.get(lsKey, []);
         
         for (var i in days) {
             days[i].events = storeTranslations(days[i].events, $translate.use());
@@ -96,7 +96,7 @@ angular.module('ufw.services', [])
                         days[i].events = storeTranslations(days[i].events, $translate.use());
                     }
                     
-                    window.localStorage[lsKey] = JSON.stringify(days);
+                    ls.set(lsKey, days, 900);
                     
                     return days;
                     
@@ -137,7 +137,7 @@ angular.module('ufw.services', [])
 
         var lsKey = 'MainSlides';
 
-        var items = JSON.parse(window.localStorage[lsKey] || '{"uk":{},"en":{}}')[ $translate.use() ];
+        var items = ls.get(lsKey, { uk: {}, en: {}})[ $translate.use() ];
 
         var sourceUrl = 'http://feeds.tochka.net/ufw/';
 
@@ -149,7 +149,7 @@ angular.module('ufw.services', [])
                     
                     items = response.data[ $translate.use() ];
                     
-                    window.localStorage[lsKey] = JSON.stringify(response.data);
+                    ls.set(lsKey, response.data, 900);
                     
                     return items;
                     
@@ -172,7 +172,7 @@ angular.module('ufw.services', [])
 
         var lsKey = 'Locations';
 
-        var items = JSON.parse(window.localStorage[lsKey] || '[]');
+        var items = ls.get(lsKey, []);
         
         items = storeTranslations(items, $translate.use());
 
@@ -186,7 +186,7 @@ angular.module('ufw.services', [])
                     
                     items = response.data;
                     
-                    window.localStorage[lsKey] = JSON.stringify(items);
+                    ls.set(lsKey, items, 900);
                     
                     items = storeTranslations(items, $translate.use());
                     
