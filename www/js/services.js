@@ -40,7 +40,7 @@ angular.module('ufw.services', [])
                     
                     items = response.data;
                     
-                    ls.set(lsKey, items, 900);
+                    ls.set(lsKey, items, 3600);
                     
                     items = storeTranslations(items, $translate.use());
                     
