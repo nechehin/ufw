@@ -22,8 +22,8 @@ angular.module('ufw.controllers', [])
 /**
  * Main slider
  */
-.controller('InfoCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, 
-     $translate, $ionicPopup, MainSlides) {
+.controller('InfoCtrl', function($scope, $ionicLoading, $translate, 
+    $ionicPopup, MainSlides) {
     
     if (typeof analytics !== 'undefined') {
         analytics.trackView('Main');
@@ -87,7 +87,6 @@ angular.module('ufw.controllers', [])
 
         MainSlides.load().then(function(){
             $scope.items = MainSlides.all();
-            $ionicSlideBoxDelegate.update();
             $ionicLoading.hide(); 
         });
     };
