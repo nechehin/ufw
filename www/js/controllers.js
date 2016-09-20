@@ -25,14 +25,10 @@ angular.module('ufw.controllers', [])
 .controller('InfoCtrl', function($scope, $ionicLoading, $translate, 
     $ionicPopup, MainSlides) {
     
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('Main');
-    }
+    analytics.trackView('Main');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Main', 'View'); 
-        }
+        analytics.trackEvent('Main', 'View'); 
     });
     
     /**
@@ -47,9 +43,7 @@ angular.module('ufw.controllers', [])
             return;
         }
         
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Language', 'Select', lang); 
-        }
+        analytics.trackEvent('Language', 'Select', lang); 
         
         $translate.use(lang);
         
@@ -107,14 +101,10 @@ angular.module('ufw.controllers', [])
     
     var isLoading = false;
     
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('Designers');
-    }
+    analytics.trackView('Designers');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Designers', 'List'); 
-        }
+        analytics.trackEvent('Designers', 'List'); 
     });
 
     $scope.items = Designers.all();
@@ -169,14 +159,10 @@ angular.module('ufw.controllers', [])
 
 .controller('DesignersDetailCtrl', function($scope, $stateParams, $ionicLoading, $translate, Designers) {
 
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('DesignersDetail');
-    }
+    analytics.trackView('DesignersDetail');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Designers', 'View', $scope.item.name); 
-        }
+        analytics.trackEvent('Designers', 'View', $scope.item.name); 
     });
 
     $scope.item = Designers.get($stateParams.designerId);
@@ -215,14 +201,10 @@ angular.module('ufw.controllers', [])
     var alertVisible = false;
     var isLoading = false;
     
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('Schedule');
-    }
+    analytics.trackView('Schedule');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Schedule', 'List'); 
-        }
+        analytics.trackEvent('Schedule', 'List'); 
     });
     
     $scope.showPager = false;
@@ -440,14 +422,10 @@ angular.module('ufw.controllers', [])
 
 .controller('EventDetailCtrl', function($scope, $stateParams, Schedule, Locations) {
 
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('EventDetail');
-    }
+    analytics.trackView('EventDetail');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Schedule', 'View', $scope.event.title); 
-        }
+        analytics.trackEvent('Schedule', 'View', $scope.event.title); 
     });
   
     $scope.event    = Schedule.getEvent($stateParams.eventId);
@@ -457,14 +435,10 @@ angular.module('ufw.controllers', [])
 .controller('LocationCtrl', function($scope, $state, $ionicHistory, $stateParams, $ionicLoading, 
     $translate, $ionicScrollDelegate, $ionicPopup, Locations) {
 
-    if (typeof analytics !== 'undefined') {
-        analytics.trackView('LocationDetail');
-    }
+    analytics.trackView('LocationDetail');
     
     $scope.$on('$ionicView.enter', function() {
-        if (typeof analytics !== 'undefined') { 
-            analytics.trackEvent('Schedule', 'Location', $scope.location.title); 
-        }
+        analytics.trackEvent('Schedule', 'Location', $scope.location.title); 
     });
   
   
