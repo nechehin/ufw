@@ -11,7 +11,6 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
         }
         
         if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
         }
      
@@ -23,77 +22,66 @@ angular.module('ufw', ['ionic', 'ufw.controllers', 'ufw.services', 'pascalprecht
 .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-        url: '/tab',
-        abstract: true,
-        templateUrl: 'templates/tabs.html'
-    })
-
-    // Each tab has its own nav history stack:
-
-    .state('tab.info', {
-        url: '/info',
-        views: {
-            'tab-info': {
-                templateUrl: 'templates/tab-info.html',
-                controller: 'InfoCtrl'
+        .state('tab', {
+            url: '/tab',
+            abstract: true,
+            templateUrl: 'templates/tabs.html'
+        })
+        .state('tab.info', {
+            url: '/info',
+            views: {
+                'tab-info': {
+                    templateUrl: 'templates/tab-info.html',
+                    controller: 'InfoCtrl'
+                }
             }
-        }
-    })
+        })
+        .state('tab.designers', {
+            url: '/designers',
+            views: {
+                'tab-designers': {
+                    templateUrl: 'templates/tab-designers.html',
+                    controller: 'DesignersCtrl'
+                }
+            }
+        })
+        .state('tab.designer-detail', {
+            url: '/designers/:designerId',
+            views: {
+                'tab-designers': {
+                    templateUrl: 'templates/designer-detail.html',
+                    controller: 'DesignersDetailCtrl'
+                }
+            }
+        })
+        .state('tab.schedule', {
+            url: '/schedule',
+            views: {
+                'tab-schedule': {
+                    templateUrl: 'templates/tab-schedule.html',
+                    controller: 'ScheduleCtrl'
+                }
+            }
+        })
+        .state('tab.event-detail', {
+            url: '/schedule/:eventId',
+            views: {
+                'tab-schedule': {
+                    templateUrl: 'templates/event-detail.html',
+                    controller: 'EventDetailCtrl'
+                }
+            }
+        })
+        .state('tab.location-detail', {
+            url: '/location/:locationId',
+            views: {
+                'tab-schedule': {
+                    templateUrl: 'templates/location-detail.html',
+                    controller: 'LocationCtrl'
+                }
+            }
+        });
 
-    .state('tab.designers', {
-        url: '/designers',
-        views: {
-            'tab-designers': {
-                templateUrl: 'templates/tab-designers.html',
-                controller: 'DesignersCtrl'
-            }
-        }
-    })
-    
-    .state('tab.designer-detail', {
-        url: '/designers/:designerId',
-        views: {
-            'tab-designers': {
-                templateUrl: 'templates/designer-detail.html',
-                controller: 'DesignersDetailCtrl'
-            }
-        }
-    })
-
-    .state('tab.schedule', {
-        url: '/schedule',
-        views: {
-            'tab-schedule': {
-                templateUrl: 'templates/tab-schedule.html',
-                controller: 'ScheduleCtrl'
-            }
-        }
-    })
-    
-    .state('tab.event-detail', {
-        url: '/schedule/:eventId',
-        views: {
-            'tab-schedule': {
-                templateUrl: 'templates/event-detail.html',
-                controller: 'EventDetailCtrl'
-            }
-        }
-    })
-    
-    .state('tab.location-detail', {
-        url: '/location/:locationId',
-        views: {
-            'tab-schedule': {
-                templateUrl: 'templates/location-detail.html',
-                controller: 'LocationCtrl'
-            }
-        }
-    });
-
-    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/info');
 
 })

@@ -90,12 +90,14 @@ angular.module('ufw.controllers', [])
     }
 })
 
+
 /**
  * Designers list
- * @param {type} $scope
- * @param {type} $ionicLoading
- * @param {type} Designers
- * @returns {undefined}
+ * 
+ * @param {Object} $scope
+ * @param {Object} $ionicLoading
+ * @param {Object} Designers
+ * @returns {void}
  */
 .controller('DesignersCtrl', function ($scope, $ionicLoading, $translate, Designers) {
     
