@@ -58,7 +58,7 @@
     <icon src="icon-76.png" width="76" height="76" gap:platform="ios"/>
     <icon src="icon-76@2x.png" width="152" height="152" gap:platform="ios"/>
     <icon src="icon-83.5@2x.png" width="167" height="167" gap:platform="ios" />
-    <icon src="icon-152.png" width="152" height="152" gap:platform="ios" />
+    <!--icon src="icon-152.png" width="152" height="152" gap:platform="ios" /-->
     
 
     
