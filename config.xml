@@ -26,7 +26,7 @@
     <preference name="auto-hide-splash-screen" value="true"/>
     
     <!--preference name="android-build-tool" value="gradle" /-->
-    <preference name="phonegap-version" value="cli-6.3.0"/>
+    <preference name="phonegap-version" value="cli-6.5.0"/>
     <preference name="android-targetSdkVersion" value="17"/>
   
     <!-- this plugin forces to build ONLY arm apk by default -->
