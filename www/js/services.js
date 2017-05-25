@@ -1,5 +1,6 @@
 /**
  * Create properties without lang sufix for multilang properties
+ * 
  * @param {object} items
  * @param {string} lang
  * @returns {object}

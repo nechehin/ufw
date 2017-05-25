@@ -10,7 +10,8 @@ angular.module('ufw.controllers', [])
 })
 
 /**
- * add to object property lang sufix _{lang}
+ * Add to object property lang sufix _{lang}
+ * 
  * @returns {Function}
  */
 .filter('lang', function ($translate) {
@@ -32,7 +33,7 @@ angular.module('ufw.controllers', [])
     });
     
     /**
-     *  Language change
+     * Language change
      */
     var langStoredKey = 'langIsStored';
   
@@ -181,6 +182,7 @@ angular.module('ufw.controllers', [])
 
 /**
  * Format date in schedule day tab
+ * 
  * @returns {Function}
  */
 .filter('formatDate', function ($translate) {
@@ -225,6 +227,7 @@ angular.module('ufw.controllers', [])
     
     /**
      * Check schedule updates
+     * 
      * @returns {void}
      */
     function checkUpdates() {
@@ -316,6 +319,7 @@ angular.module('ufw.controllers', [])
     
     /**
      * Slide to today slide
+     * 
      * @returns {void}
      */
     function slideToToday() {
@@ -336,6 +340,7 @@ angular.module('ufw.controllers', [])
     
     /**
      * Return event style class
+     * 
      * @param {object} event
      * @returns {String}
      */
