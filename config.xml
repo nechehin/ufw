@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.ufw937334" version="1.0.8" 
+<widget id="com.ionicframework.ufw937334" version="1.0.9"
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0" 
         xmlns:gap="http://phonegap.com/ns/1.0"
-        versionCode="8355">
+        versionCode="8356">
     <name>UFW Guide</name>
     <description>
         Ukrainian Fashion Week application
